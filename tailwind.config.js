@@ -2,7 +2,7 @@
 export default {
   content: [
     "./index.html",
-    "./src/*.{js,ts,jsx,tsx}",
+    "./src/*/**/.jsx",
   ],
   theme: {
     extend: {
@@ -12,7 +12,9 @@ export default {
         'bg2': 'hsl(0, 0%, 95%)'
       },
       backgroundImage: {
-        'desktopHero': `url('/home/desktop/image-hero.jpg')`
+        'desktopHero': `url('/home/desktop/image-hero.jpg')`,
+        'tabletHero': `url('/home/tablet/image-header.jpg')`,
+        'mobileHero': `url('/home/desktop/image-header.jpg')`,
       }
     },
   },
