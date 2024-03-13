@@ -19,6 +19,7 @@ export default {
         'desktopHero': "url('/home/desktop/image-hero.jpg')",
         'tabletHero': "url('/home/tablet/image-header.jpg')",
         'mobileHero': "url('/home/mobile/image-header.jpg')",
+        'patternCircles' : "url('/home/desktop/pattern-circles.svg')" 
       }
     },
   },
