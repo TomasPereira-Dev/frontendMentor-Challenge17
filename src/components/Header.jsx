@@ -8,7 +8,7 @@ const Header = () => {
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
 
     return(
-        <header className="relative flex justify-between items-center w-full p-8 bg-black border-b">
+        <header className="relative flex justify-between items-center w-full p-8 bg-bg3 border-b border-white/30 bleeding-1">
             <div className="flex justify-between items-center gap-2 "> 
                 <img className="lg:hidden" src="/shared/tablet/icon-hamburger.svg" alt=" "  onClick={() => {setHamburgerIsOpen(!hamburgerIsOpen)}}/>
                 <Link to='/'><img src="/shared/desktop/logo.svg" alt="audiophile's logo" /></Link>

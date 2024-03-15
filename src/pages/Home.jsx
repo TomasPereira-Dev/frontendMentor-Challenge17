@@ -4,9 +4,10 @@ import AboutSection from "../components/AboutSection.jsx"
 
 const Home = () => {
     return (
-        <main className="flex flex-col gap-16 mb-16">
-           <section className="flex items-center justify-center h-screen px-8 bg-mobileHero bg-center bg-cover bg-no-repeat 
-            md:bg-tabletHero lg:justify-start lg:bg-desktopHero lg:bg-cover">
+        <main className="flex flex-col gap-16 mb-16 ">
+           <section className="flex items-center justify-center h-screen px-8 
+           bg-mobileHero bg-center bg-no-repeat bleeding-1
+           md:bg-tabletHero lg:justify-start lg:bg-desktopHero lg:bg-cover">
                 <div className="flex flex-col items-center gap-4 justify-center text-center
                 lg:items-start lg:gap-6 lg:text-left">
                     <p className="text-white/75 font-thin tracking-[0.6rem] md:text-sm">NEW PRODUCT</p>
