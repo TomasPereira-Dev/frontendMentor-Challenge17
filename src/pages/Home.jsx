@@ -1,10 +1,11 @@
 import Shops from "../components/Shops.jsx"
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import AboutSection from "../components/AboutSection.jsx"
+import data from "../data.json"
 
 const Home = () => {
     return (
-        <main className="flex flex-col gap-16 mb-16 ">
+        <main className="flex flex-col gap-16 mb-16">
            <section className="flex items-center justify-center h-screen px-8 
            bg-mobileHero bg-center bg-no-repeat bleeding-1
            md:bg-tabletHero lg:justify-start lg:bg-desktopHero lg:bg-cover">
@@ -13,7 +14,7 @@ const Home = () => {
                     <p className="text-white/75 font-thin tracking-[0.6rem] md:text-sm">NEW PRODUCT</p>
                     <h1 className="text-4xl text-white font-bold max-w-[10ch] md:text-6xl">XX99 MARK II HEADPHONES</h1>
                     <p className="text-white/75 max-w-[32ch] leading-7 md:max-w-[38ch]">Experience natural, lifelike audio and exeptional build quality made for the passionate music enthusiast.</p>
-                    <SeeProductBtn classes={`text-white bg-cta`}/>
+                    <SeeProductBtn classes={`text-white bg-cta`} dynamicPath={`xx99-mark-two-headphones`}/>
                 </div>
            </section>
            <section>
@@ -31,7 +32,7 @@ const Home = () => {
                     <div className="flex flex-col items-center text-center gap-6 lg:items-start lg:text-start">
                         <h2 className="text-4xl text-white  font-bold max-w-[8ch]md:text-6xl ">ZX9 SPEAKER</h2>
                         <p className=" text-white/75 max-w-[30ch] leading-7 md:max-w-[36ch]">Upgrade to premium speakers that are phenomenally build to deliver truly remarkable sound.</p>
-                        <SeeProductBtn classes={`text-white bg-black`}/>
+                        <SeeProductBtn classes={`text-white bg-black`} dynamicPath={`zx9-speaker`}/>
                     </div>
                 </div>
                 <div className="relative rounded-lg overflow-hidden md:col-span-2">
@@ -42,7 +43,7 @@ const Home = () => {
                     </picture>
                     <div className="absolute top-[35%] left-4 flex flex-col gap-8 lg:left-24">
                         <h2 className="text-3xl font-bold">ZX7 SPEAKER</h2>
-                        <SeeProductBtn classes={`text-black bg-transparent border border-black`}/>
+                        <SeeProductBtn classes={`text-black bg-transparent border border-black`} dynamicPath={`zx7-speaker`}/>
                     </div>
                 </div>
                 <div className="rounded-lg overflow-hidden">
@@ -55,7 +56,7 @@ const Home = () => {
                 <div className="flex flex-col justify-center gap-8 px-4 py-8 bg-bg2 rounded-lg*
                 lg:px-24">
                     <h2 className="text-3xl font-bold">YX1 EARPHONES</h2>
-                    <SeeProductBtn classes={`text-black bg-transparent border border-black`}/>
+                    <SeeProductBtn classes={`text-black bg-transparent border border-black`} dynamicPath={`yx1-earphones`}/>
                 </div>
            </section>
             <AboutSection />

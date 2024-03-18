@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 import data from "../data.json" 
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import Shops from "../components/Shops.jsx"
 import AboutSection from "../components/AboutSection.jsx"
 
-const Earphones = () => {
-
-    const newData = data.filter((product) => product.category === "headphones")
-
+const CategoryPage = ({category}) => {
+    const newData = data.filter((product) => product.category === category)
     
     return (
         <main className="flex flex-col gap-16 px-8 pb-8">
@@ -29,7 +28,7 @@ const Earphones = () => {
                                                 <p className={`${!product.new && 'hidden'} text-cta font-light tracking-[.5rem]`}>NEW PRODUCT</p>
                                                 <h2 className="text-3xl font-bold max-w-[12ch] md:text-5xl">{product.name}</h2>
                                                 <p className="text-black/50 max-w-[34ch] md:max-w-full">{product.description}</p>
-                                                <SeeProductBtn classes={`bg-cta text-white`}/>
+                                                <SeeProductBtn classes={`bg-cta text-white`} dynamicPath={product.slug}/>
                                             </div>
                                           </div>
                 )}
@@ -42,4 +41,4 @@ const Earphones = () => {
     )
 }
 
-export default Earphones
+export default CategoryPage

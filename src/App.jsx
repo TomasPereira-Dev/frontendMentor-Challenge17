@@ -2,9 +2,8 @@ import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
-import Headphones from './pages/Headphones.jsx'
-import Speakers from './pages/Speakers.jsx'
-import Earphones from './pages/Earphones.jsx'
+import CategoryPage from './pages/CategoryPage.jsx'
+import ProductPage from './pages/ProductPage.jsx'
 import Checkout from './pages/Checkout.jsx'
 
 function App() {
@@ -13,10 +12,11 @@ function App() {
     <Header />
         <Routes>
           <Route path='/' element={<Home />}/>
-          <Route path='/headphones' element={<Headphones />}/>
-          <Route path='/speakers' element={<Speakers />}/>
-          <Route path='/earphones' element={<Earphones />}/>
+          <Route path='/headphones' element={<CategoryPage category={"headphones"} />}/>
+          <Route path='/speakers' element={<CategoryPage category={"speakers"} />}/>
+          <Route path='/earphones' element={<CategoryPage category={"earphones"} />}/>
           <Route path='/checkout' element={<Checkout />}/>
+          <Route path='/:productName' element={<ProductPage />}/>
         </Routes>
     <Footer />
     </>
