@@ -28,7 +28,7 @@ const CategoryPage = ({category}) => {
                                                 <p className={`${!product.new && 'hidden'} text-cta font-light tracking-[.5rem]`}>NEW PRODUCT</p>
                                                 <h2 className="text-3xl font-bold max-w-[12ch] md:text-5xl">{product.name}</h2>
                                                 <p className="text-black/50 max-w-[34ch] md:max-w-full">{product.description}</p>
-                                                <SeeProductBtn classes={`bg-cta text-white`} dynamicPath={product.slug}/>
+                                                <SeeProductBtn classes={`bg-cta text-white`} dynamicPath={`/${product.slug}`}/>
                                             </div>
                                           </div>
                 )}
