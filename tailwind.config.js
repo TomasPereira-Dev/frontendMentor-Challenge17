@@ -11,6 +11,7 @@ export default {
       },
       colors: {
         'cta': 'hsl(21, 65%, 57%)',
+        'inactive': 'hsl(0, 0%, 59%)',
         'bg1': 'hsl(0, 0%, 6%)',
         'bg2': 'hsl(0, 0%, 95%)',
         'bg3': '#191919',

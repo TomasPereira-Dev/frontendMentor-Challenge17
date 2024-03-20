@@ -1,11 +1,14 @@
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { NavLink, Link } from "react-router-dom"
-import HamburgerMenu from "./HamburgerMenu"
+import HamburgerMenu from "./HamburgerMenu.jsx"
+import Cart from "./Cart.jsx"
 
 
 const Header = () => {
 
-    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
+    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
+    const [cartIsOpen ,setCartIsOpen] = useState(false);
 
     return(
         <header className="relative flex justify-between items-center w-full p-8 bg-bg3 border-b border-white/30 bleeding-1">
@@ -21,8 +24,9 @@ const Header = () => {
                         <li><NavLink to='/earphones'>EARPHONES</NavLink></li>
                     </ul>
                 </nav>
-            <img src="/shared/desktop/icon-cart.svg" alt=" " />
+            <img onClick={() => {setCartIsOpen(!cartIsOpen)}} src="/shared/desktop/icon-cart.svg" alt=" " />
             {hamburgerIsOpen && <HamburgerMenu />}
+            {cartIsOpen && createPortal(<Cart setCartIsOpen={setCartIsOpen}/>, document.getElementById("cart-portal"))}
         </header>
     )
 }
