@@ -24,7 +24,7 @@ const Header = () => {
                         <li><NavLink to='/earphones'>EARPHONES</NavLink></li>
                     </ul>
                 </nav>
-            <img onClick={() => {setCartIsOpen(!cartIsOpen)}} src="/shared/desktop/icon-cart.svg" alt=" " />
+            <img className="cursor-pointer" onClick={() => {setCartIsOpen(!cartIsOpen)}} src="/shared/desktop/icon-cart.svg" alt=" " />
             {hamburgerIsOpen && <HamburgerMenu />}
             {cartIsOpen && createPortal(<Cart setCartIsOpen={setCartIsOpen}/>, document.getElementById("cart-portal"))}
         </header>

@@ -5,7 +5,7 @@ const Cart = ({setCartIsOpen}) => {
     const flag = true;
 
     return (
-        <div className="fixed top-0 z-50 flex h-screen w-full max-w-screen-lg p-6 bg-black/85 md:justify-end md:bleeding-1" onClick={() => {setCartIsOpen(false)}}>
+        <div className="fixed top-0 z-50 flex h-screen w-full max-w-screen-lg p-6 bg-black/50 md:justify-end md:bleeding-2" onClick={() => {setCartIsOpen(false)}}>
             <div className="relative top-14 flex flex-col gap-16 w-full h-fit p-8 bg-white rounded-md md:w-1/2 ">
                 <div className="flex justify-between">
                     <p className="text-lg font-bold">CART (0)</p>
