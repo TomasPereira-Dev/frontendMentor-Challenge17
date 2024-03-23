@@ -2,7 +2,10 @@ import { useForm } from 'react-hook-form'
 
 const Checkout = () => {
 
-    const {handleSubmit, register, formState: { errors }} = useForm();
+    const {handleSubmit, register, formState: { errors }, watch} = useForm();
+
+    const paymentMethod = watch("paymentMethod");
+
     return (
         <main className="p-4 bg-bg2 bleeding-3">
             <button className="mb-4 text-semibold text-text1">Go Back</button>
@@ -49,14 +52,18 @@ const Checkout = () => {
                             <div className='p-4 border rounded-md group'>
                                 <label className='flex flex-row-reverse justify-end gap-2'>
                                     MercadoPago
-                                    <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio"/>
+                                    <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago"/>
                                 </label>
                             </div>
                             <div className='p-4 border rounded-md peer'>
                                 <label className='flex flex-row-reverse justify-end gap-2'>
                                     Cash on Delivery
-                                    <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio"/>
+                                    <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery"/>
                                 </label>
+                            </div>
+                            <div className={`${paymentMethod == "mercadoPago" && 'hidden'}`}>
+                                <img className='mb-4' src="/checkout/icon-cash-on-delivery.svg" alt=" " />
+                                <p className='text-text1 font-semibold max-w-[32ch]'>The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.</p>
                             </div>
                         </div>
                     </form>
