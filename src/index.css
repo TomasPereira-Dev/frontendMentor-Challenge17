@@ -11,4 +11,8 @@
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
         clip-path: inset(0 -100vmax);
     }
+    .bleeding-3{
+        box-shadow: 0 0 0 100vmax hsl(0, 0%, 95%);
+        clip-path: inset(0 -100vmax);
+    }
 }
