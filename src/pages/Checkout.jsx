@@ -1,6 +1,10 @@
 import { useForm } from 'react-hook-form'
+import { useContext } from 'react';
+import { Context } from '../context/context.jsx';
 
 const Checkout = () => {
+    
+    const products = useContext(Context);
 
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
@@ -78,6 +82,22 @@ const Checkout = () => {
                 </div>
                 <div className='flex flex-col gap-2 p-4 h-fit bg-white rounded-md md:p-8'>
                     <h2 className='text-lg font-bold'>SUMMARY</h2>
+                    <ul>
+                        {products.productList.map((product) => {
+                            <li key={product.id}>
+                                <div>
+                                    <img src={product.others[0].image.mobile} alt={product.others[0].name} />
+                                    <div>
+                                        <p>{product.others[0].name}</p>
+                                        <p>${product.price}</p>
+                                    </div>
+                                    <p>x{product.ammount}</p>
+                                </div>
+
+
+                            </li>   
+                        })}
+                    </ul>
                     <ul>
                         <li className='flex justify-between items-center'><p className='text-text1'>TOTAL</p> <span className='text-lg font-bold'>$0</span></li>
                         <li className='flex justify-between items-center'><p className='text-text1'>SHIPPING</p> <span className='text-lg font-bold'>$0</span></li>

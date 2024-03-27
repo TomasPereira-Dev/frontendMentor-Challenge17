@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import data from "../data.json"
-import SeeProductBtn from "../components/SeeProductBtn";
-import Shops from "../components/Shops";
-import AboutSection from "../components/AboutSection";
+import SeeProductBtn from "../components/SeeProductBtn.jsx";
+import Shops from "../components/Shops.jsx";
+import AboutSection from "../components/AboutSection.jsx";
+import { Context } from "../context/context.jsx";
 
 const ProductPage = () => {
-
+    
     const {productName} = useParams();
     const navigate = useNavigate();
 
+    const {productList, setProductList} = useContext(Context);
     const [quantity, setQuantity] = useState(0);
 
-    const productData = data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase())
+    const productData = data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase());
+    const productForList = {
+      name: productData[0].others[0].name,
+      price: productData[0].price,
+      amount: quantity
+    };
 
     return(
         <main className="flex flex-col gap-8 p-8 lg:gap-24">
@@ -31,9 +38,9 @@ const ProductPage = () => {
                         <p className="text-xl font-bold">${productData[0].price}</p>
                         <div className="flex gap-4">
                             <div className="flex items-center justify-center gap-4 px-6 py-3 text-xl bg-bg2">
-                                <button>-</button><span className="text-bold">{quantity}</span><button>+</button>
+                                <button onClick={() => {quantity > 0 && setQuantity(quantity - 1)}}>-</button><span className="text-bold">{quantity}</span><button onClick={() => {setQuantity(quantity + 1)}}>+</button>
                             </div>
-                            <button className="text-white font-semibold bg-cta px-6 py-3">ADD TO CART</button>
+                            <button className="text-white font-semibold bg-cta px-6 py-3" onClick={() => {quantity > 0 && setProductList([...productList, productForList])}}>ADD TO CART</button>
                         </div>
                     </div>
                 </div>   
