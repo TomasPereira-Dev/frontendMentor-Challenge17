@@ -6,12 +6,12 @@ const Checkout = () => {
     const paymentMethod = watch("paymentMethod", "mercadoPago");
 
     return (
-        <main className="p-4 bg-bg2 bleeding-3">
+        <main className="p-4 lg:px-8 lg:py-16 bg-bg2 bleeding-3">
             <button className="mb-4 text-semibold text-text1">Go Back</button>
-            <section className='grid gap-4 lg:grid-cols-3 md:gap-8'>
+            <section className='grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-8'>
                 <div className='p-4 bg-white rounded-md md:p-8 lg:col-span-2'>
-                    <h1 className="mb-4 text-2xl font-bold">CHECKOUT</h1>
-                    <form className='flex flex-col gap-4 text-sm' onSubmit={handleSubmit((data) => console.log(data))}> 
+                    <h1 className="mb-12 text-2xl font-bold lg:text-3xl">CHECKOUT</h1>
+                    <form className='flex flex-col gap-8 text-sm' onSubmit={handleSubmit((data) => console.log(data))}> 
                         <div>
                             <h2 className='mb-4 text-cta font-bold'>BILLING DETAILS</h2>
                             <div className='grid gap-4 md:grid-cols-2'>
@@ -30,9 +30,9 @@ const Checkout = () => {
                             </div>
                         </div>
                         <div className="grid gap-4">
-                            <h2 className='mb-4 text-cta text-sm font-bold'>SHIPPING INFO</h2>
-                            <div className='grid gap-4 md:grid-cols-2'>
-                                <label className='flex flex-col gap-2 font-bold col-span-2'>
+                            <h2 className='text-cta text-sm font-bold'>SHIPPING INFO</h2>
+                            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                                <label className='flex flex-col gap-2 font-bold md:col-span-2'>
                                     Your Address
                                     <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("address", {required: 'this is required'})} type="text" placeholder='123 fake street'/>
                                 </label>
