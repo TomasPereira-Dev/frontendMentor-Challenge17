@@ -85,11 +85,13 @@ const Checkout = () => {
                     <ul>
                         {productList.map(product => (
                             <li key={product.id}>
-                                <div>
-                                    <img src={product.image} alt={product.name} />
-                                    <div>
-                                        <p>{product.name}</p>
-                                        <p>${product.price}</p>
+                                <div className='flex justify-between items-center'>
+                                    <div className='flex items-center'>
+                                        <img className='w-1/4 aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
+                                        <div>
+                                            <p>{product.name}</p>
+                                            <p>${product.price}</p>
+                                        </div>
                                     </div>
                                     <p>x{product.amount}</p>
                                 </div>
