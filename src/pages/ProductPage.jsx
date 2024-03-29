@@ -17,8 +17,8 @@ const ProductPage = () => {
     const productData = data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase());
     const productForList = {
       id: productData[0].id,
-      image: productData[0].cartImage,
-      name: productData[0].name,
+      image: productData[0].cartInfo.image,
+      name: productData[0].cartInfo.name,
       price: productData[0].price,
       amount: quantity
     };

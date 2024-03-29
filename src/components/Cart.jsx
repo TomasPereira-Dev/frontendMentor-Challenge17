@@ -13,22 +13,20 @@ const Cart = ({setCartIsOpen}) => {
                     <p className="text-lg font-bold">CART ({productList.length})</p>
                     <button className="text-sm text-inactive underline cursor-pointer">Remove All</button>
                 </div>
-                <ul className="">
+                <ul>
                     {productList.map(product => (
-                            <li className="flex justify-between items-center" key={product.id}>
-                                <div className='flex items-center gap-4'>
-                                    <img className='block object-contain rounded-md' src={product.image} alt={product.name} />
-                                    <div>
-                                        <p className='font-bold'>{product.name}</p>
-                                        <p className='text-text1'>${product.price}</p>
-                                    </div>
+                        <li className="flex justify-between items-center gap-2" key={product.id}>
+                            <div className="flex items-center gap-2" >
+                                <img className='w-1/3 rounded-md' src={product.image} alt={product.name} />
+                                <div>
+                                    <p className='text-sm font-bold md:text-base' >{product.name}</p>
+                                    <p className='text-sm text-text1 md:text-base'>${product.price}</p>
                                 </div>
-                                <div className="flex items-center gap-8 px-4 py-2 bg-bg2 rounded">
-                                    <button>-</button>
-                                    <p>{product.amount}</p>
-                                    <button>+</button>
-                                </div>
-                            </li>
+                            </div>
+                            <div className="flex items-center gap-4 bg-bg2 rounded">
+                                <button className="px-2 py-1">-</button><p>{product.amount}</p><button className="px-2 py-1">+</button>
+                            </div>
+                        </li>
                         )
                     )}
                 </ul>        
