@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useState, useContext} from "react"
 import { createPortal } from "react-dom"
 import { NavLink, Link } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu.jsx"
 import Cart from "./Cart.jsx"
+import { Context } from "../context/context.jsx"
 
 
 const Header = () => {
 
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
     const [cartIsOpen ,setCartIsOpen] = useState(false);
+    const {productList, setProductList} = useContext(Context);
 
     return(
         <header className="relative flex justify-between items-center w-full p-8 bg-bg3 border-b border-white/30 bleeding-1">
@@ -24,7 +26,11 @@ const Header = () => {
                         <li><NavLink to='/earphones'>EARPHONES</NavLink></li>
                     </ul>
                 </nav>
-            <img className="cursor-pointer" onClick={() => {setCartIsOpen(!cartIsOpen)}} src="/shared/desktop/icon-cart.svg" alt=" " />
+            <div className="relative">
+                <span className={`absolute -top-3 left-3 ${productList.length > 0 ? 'block' : 'hidden'} px-2 text-sm text-white bg-cta  rounded-full`}>{productList.length}</span>
+                <img className='cursor-pointer' onClick={() => {setCartIsOpen(!cartIsOpen)}} src="/shared/desktop/icon-cart.svg" alt=" " />
+            </div>
+            
             {hamburgerIsOpen && <HamburgerMenu />}
             {cartIsOpen && createPortal(<Cart setCartIsOpen={setCartIsOpen}/>, document.getElementById("cart-portal"))}
         </header>

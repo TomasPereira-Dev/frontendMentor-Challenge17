@@ -86,14 +86,14 @@ const Checkout = () => {
                         {productList.map(product => (
                             <li key={product.id}>
                                 <div className='flex justify-between items-center'>
-                                    <div className='flex items-center'>
+                                    <div className='flex items-center gap-4'>
                                         <img className='w-1/4 aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
                                         <div>
-                                            <p>{product.name}</p>
-                                            <p>${product.price}</p>
+                                            <p className='font-bold'>{product.name}</p>
+                                            <p className='text-text1'>${product.price}</p>
                                         </div>
                                     </div>
-                                    <p>x{product.amount}</p>
+                                    <p className='text-text1'>x{product.amount}</p>
                                 </div>
                             </li>   
                         )
