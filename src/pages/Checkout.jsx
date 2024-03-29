@@ -4,7 +4,7 @@ import { Context } from '../context/context.jsx';
 
 const Checkout = () => {
     
-    const products = useContext(Context);
+    const {productList, setProductList} = useContext(Context);
 
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
@@ -83,20 +83,19 @@ const Checkout = () => {
                 <div className='flex flex-col gap-2 p-4 h-fit bg-white rounded-md md:p-8'>
                     <h2 className='text-lg font-bold'>SUMMARY</h2>
                     <ul>
-                        {products.productList.map((product) => {
+                        {productList.map(product => (
                             <li key={product.id}>
                                 <div>
-                                    <img src={product.others[0].image.mobile} alt={product.others[0].name} />
+                                    <img src={product.image} alt={product.name} />
                                     <div>
-                                        <p>{product.others[0].name}</p>
+                                        <p>{product.name}</p>
                                         <p>${product.price}</p>
                                     </div>
-                                    <p>x{product.ammount}</p>
+                                    <p>x{product.amount}</p>
                                 </div>
-
-
                             </li>   
-                        })}
+                        )
+                        )}
                     </ul>
                     <ul>
                         <li className='flex justify-between items-center'><p className='text-text1'>TOTAL</p> <span className='text-lg font-bold'>$0</span></li>
