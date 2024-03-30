@@ -4,7 +4,7 @@ import { Context } from '../context/context.jsx';
 
 const Checkout = () => {
     
-    const {productList, setProductList} = useContext(Context);
+    const {productList, finalTotal, setProductList, setFinalTotal} = useContext(Context);
 
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
@@ -100,10 +100,10 @@ const Checkout = () => {
                         )}
                     </ul>
                     <ul>
-                        <li className='flex justify-between items-center'><p className='text-text1'>TOTAL</p> <span className='text-lg font-bold'>$0</span></li>
-                        <li className='flex justify-between items-center'><p className='text-text1'>SHIPPING</p> <span className='text-lg font-bold'>$0</span></li>
-                        <li className='flex justify-between items-center'><p className='text-text1'>VAT (INCLUDED)</p> <span className='text-lg font-bold'>$0</span></li>
-                        <li className='flex justify-between items-center my-8'><p className='text-text1'>GRAND TOTAL</p> <span className='text-lg text-cta font-bold'>$0</span></li>
+                        <li className='flex justify-between items-center'><p className='text-text1'>TOTAL</p> <span className='text-lg font-bold'>${finalTotal}</span></li>
+                        <li className='flex justify-between items-center'><p className='text-text1'>SHIPPING</p> <span className='text-lg font-bold'>$50</span></li>
+                        <li className='flex justify-between items-center'><p className='text-text1'>VAT (INCLUDED)</p> <span className='text-lg font-bold'>${Math.round((finalTotal * 20) / 100)}</span></li>
+                        <li className='flex justify-between items-center my-8'><p className='text-text1'>GRAND TOTAL</p> <span className='text-lg text-cta font-bold'>${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</span></li>
                     </ul>
                     <button className='py-2 text-white font-bold bg-cta'>CONTINUE & PAY</button>
                 </div>
