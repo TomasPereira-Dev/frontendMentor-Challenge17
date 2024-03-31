@@ -1,14 +1,31 @@
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react';
+import { createPortal } from 'react-dom';
 import { Context } from '../context/context.jsx';
+import SuccessModal from '../components/SuccessModal.jsx';
 
 const Checkout = () => {
-    const emailRegex = /[-A-Za-z0-9!#$%&'*+\/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+\/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
-    const {productList, finalTotal, setProductList, setFinalTotal} = useContext(Context);
+    const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
 
-    const {handleSubmit, register, formState: { errors }, watch} = useForm();
+    const {productList, finalTotal, setProductList, setFinalTotal} = useContext(Context);
+    const {handleSubmit, register, formState: { errors, isSubmitted}, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
     console.log(errors)
+    const mappedList = productList.map(product => (
+        <li key={product.id}>
+            <div className='flex justify-between items-center'>
+                <div className='flex items-center gap-4'>
+                    <img className='w-1/4 aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
+                    <div>
+                        <p className='font-bold'>{product.name}</p>
+                        <p className='text-text1'>${product.price}</p>
+                    </div>
+                </div>
+                <p className='text-text1'>x{product.amount}</p>
+            </div>
+        </li>   
+    ));
+
     return (
         <main className="p-4 lg:px-8 lg:py-16 bg-bg2 bleeding-3">
             <button className="mb-4 text-semibold text-text1">Go Back</button>
@@ -21,7 +38,7 @@ const Checkout = () => {
                             <div className='grid gap-4 md:grid-cols-2'>
                                 <label className='flex flex-col gap-2 font-bold'>
                                     Name
-                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("name", {required: 'this is required', pattern: {value: /A-Za-z/, message: `please write your name`}})} type="text" placeholder='Tomas Pereira'/>
+                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("name", {required: 'this is required', pattern: {value: /[A-Za-z]/, message: `please write your name`}})} type="text" placeholder='Tomas Pereira'/>
                                     {errors.name && <p className='text-xs text-red-500 font-bold'>{errors.name.message}</p>}
                                 </label>
                                 <label className='flex flex-col gap-2 font-bold'>
@@ -31,7 +48,7 @@ const Checkout = () => {
                                 </label>
                                 <label className='flex flex-col gap-2 font-bold'>
                                     Phone Number
-                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("phoneNumber", {required: 'this is required', pattern: {value: /A-Za-z/, message: `please write your phone number`}})} type="number" placeholder='+54 9 11 2122 5152'/>
+                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("phoneNumber", {required: 'this is required', pattern: {value: /[0-9]/, message: `please write your phone number`}})} type="number" placeholder='+54 9 11 2122 5152'/>
                                     {errors.phoneNumber && <p className='text-xs text-red-500 font-bold'>{errors.phoneNumber.message}</p>}
                                 </label>
                             </div>
@@ -41,7 +58,7 @@ const Checkout = () => {
                             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                                 <label className='flex flex-col gap-2 font-bold md:col-span-2'>
                                     Your Address
-                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("address", {required: 'this is required', pattern: {value: /A-Za-z0-9/, message: `please write your home address`}})} type="text" placeholder='123 fake street'/>
+                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("address", {required: 'this is required', pattern: {value: /[A-Za-z0-9]/, message: `please write your home address`}})} type="text" placeholder='123 fake street'/>
                                     {errors.address && <p className='text-xs text-red-500 font-bold'>{errors.address.message}</p>}
                                 </label>
                                 <label className='flex flex-col gap-2 font-bold'>
@@ -53,12 +70,12 @@ const Checkout = () => {
                                 </label>
                                 <label className='flex flex-col gap-2 font-bold'>
                                     City
-                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("city", {required: 'this is required', pattern: {value: /A-Za-z/, message: `please write your city`}})} type="text" placeholder='Springfield'/>
+                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("city", {required: 'this is required', pattern: {value: /[A-Za-z]/, message: `please write your city`}})} type="text" placeholder='Springfield'/>
                                     {errors.city && <p className='text-xs text-red-500 font-bold'>{errors.city.message}</p>}
                                 </label>
                                 <label className='flex flex-col gap-2 font-bold'>
                                     Country
-                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("country", {required: 'this is required', pattern: {value: /A-Za-z/, message: `please write your country`}})} type="text" placeholder='United States'/>
+                                    <input className='p-4 border rounded-md outline-none focus:border-cta' {...register("country", {required: 'this is required', pattern: {value: /[A-Za-z]/, message: `please write your country`}})} type="text" placeholder='United States'/>
                                     {errors.country && <p className='text-xs text-red-500 font-bold'>{errors.country.message}</p>}
                                 </label>
                             </div>
@@ -93,21 +110,7 @@ const Checkout = () => {
                 <div className='flex flex-col gap-2 p-4 h-fit bg-white rounded-md md:p-8'>
                     <h2 className='text-lg font-bold'>SUMMARY</h2>
                     <ul>
-                        {productList.map(product => (
-                            <li key={product.id}>
-                                <div className='flex justify-between items-center'>
-                                    <div className='flex items-center gap-4'>
-                                        <img className='w-1/4 aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
-                                        <div>
-                                            <p className='font-bold'>{product.name}</p>
-                                            <p className='text-text1'>${product.price}</p>
-                                        </div>
-                                    </div>
-                                    <p className='text-text1'>x{product.amount}</p>
-                                </div>
-                            </li>   
-                        )
-                        )}
+                        {mappedList}
                     </ul>
                     <ul>
                         <li className='flex justify-between items-center'><p className='text-text1'>TOTAL</p> <span className='text-lg font-bold'>${finalTotal}</span></li>
@@ -118,9 +121,9 @@ const Checkout = () => {
                     <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form'>CONTINUE & PAY</button>
                 </div>
             </section>
+            {isSubmitted && createPortal(<SuccessModal itemList={mappedList} finalTotal={finalTotal}/>, document.getElementById("success-portal"))}
         </main>
-    )
-    
+    ) 
 }
 
 export default Checkout
