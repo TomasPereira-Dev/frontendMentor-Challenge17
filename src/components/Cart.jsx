@@ -73,7 +73,7 @@ const Cart = ({setCartIsOpen}) => {
                         <p className="text-inactive">TOTAL</p>
                         <p className="text-lg font-bold">${total}</p>
                     </div>
-                    <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold bg-cta ${productList.length == 0 && 'bg-inactive'}`}>CHECKOUT</Link>
+                    <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold ${productList.length == 0 ? 'bg-inactive' : 'bg-cta hover:brightness-125 hover:ease-in-out hover:delay-75'}`}>CHECKOUT</Link>
                 </div>
                 
             </div>
