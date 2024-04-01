@@ -10,7 +10,7 @@ const Checkout = () => {
     const {productList, finalTotal} = useContext(Context);
     const {handleSubmit, register, formState: { errors, isSubmitSuccessful}, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
-    console.log(errors)
+
     const mappedList = productList.map(product => (
         <li key={product.id}>
             <div className='flex justify-between items-center'>

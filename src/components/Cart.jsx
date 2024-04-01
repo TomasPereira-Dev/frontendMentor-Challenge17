@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import { Context } from "../context/context.jsx";
@@ -73,7 +72,9 @@ const Cart = ({setCartIsOpen}) => {
                         <p className="text-inactive">TOTAL</p>
                         <p className="text-lg font-bold">${total}</p>
                     </div>
-                    <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold ${productList.length == 0 ? 'bg-inactive' : 'bg-cta hover:brightness-125 hover:ease-in-out hover:delay-75'}`}>CHECKOUT</Link>
+                    <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold 
+                    ${productList.length == 0 ? 'bg-inactive' : 'bg-cta hover:brightness-125 hover:ease-in-out hover:delay-75'}`}
+                    onClick = {() => {productList.length > 0 && setCartIsOpen(false)}}>CHECKOUT</Link>
                 </div>
                 
             </div>
