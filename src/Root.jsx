@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, ScrollRestoration } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
@@ -6,10 +6,11 @@ import CategoryPage from './pages/CategoryPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import Checkout from './pages/Checkout.jsx'
 
-function App() {
+function Root() {
   return(
     <>
     <Header />
+    <ScrollRestoration />
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/headphones' element={<CategoryPage category={"headphones"} />}/>
@@ -23,4 +24,4 @@ function App() {
   )
 }
 
-export default App
+export default Root

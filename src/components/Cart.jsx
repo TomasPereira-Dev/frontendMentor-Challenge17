@@ -45,8 +45,8 @@ const Cart = ({setCartIsOpen}) => {
 
 
     return (
-        <div className="fixed top-0 z-50 flex w-full h-screen max-w-screen-lg p-8 bg-black/50 md:justify-end md:bleeding-2" onClick={() => {setCartIsOpen(false)}}>
-            <div className="relative top-1/4 flex flex-col justify-between gap-4 w-full h-4/6 p-8 bg-white rounded-md overflow-y-scroll md:top-14 md:w-1/2 ">
+        <div  className="BACKGROUND fixed top-0 z-40 flex w-full h-screen max-w-screen-lg p-8 bg-black/50 md:justify-end md:bleeding-2" onClick={(e) => {e.target.classList.contains('BACKGROUND') && setCartIsOpen(false)}}>
+            <div className="relative z-50 top-1/4 flex flex-col justify-between gap-4 w-full h-4/6 p-8 bg-white rounded-md overflow-y-scroll md:top-14 md:w-1/2 ">
                 <div className="flex justify-between">
                     <p className="text-lg font-bold">CART ({productList.length})</p>
                     <button className="text-sm text-inactive underline cursor-pointer" onClick={() => {setProductList([])}}>Remove All</button>
@@ -73,7 +73,7 @@ const Cart = ({setCartIsOpen}) => {
                         <p className="text-inactive">TOTAL</p>
                         <p className="text-lg font-bold">${total}</p>
                     </div>
-                    <Link to='/checkout' className={`w-full py-3 text-sm text-white text-center font-semibold bg-cta ${productList.length == 0 && 'bg-inactive'}`}>CHECKOUT</Link>
+                    <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold bg-cta ${productList.length == 0 && 'bg-inactive'}`}>CHECKOUT</Link>
                 </div>
                 
             </div>

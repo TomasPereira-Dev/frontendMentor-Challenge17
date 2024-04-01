@@ -7,8 +7,8 @@ import SuccessModal from '../components/SuccessModal.jsx';
 const Checkout = () => {
     const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
 
-    const {productList, finalTotal, setProductList, setFinalTotal} = useContext(Context);
-    const {handleSubmit, register, formState: { errors, isSubmitted}, watch} = useForm();
+    const {productList, finalTotal} = useContext(Context);
+    const {handleSubmit, register, formState: { errors, isSubmitSuccessful}, watch} = useForm();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
     console.log(errors)
     const mappedList = productList.map(product => (
@@ -121,7 +121,7 @@ const Checkout = () => {
                     <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form'>CONTINUE & PAY</button>
                 </div>
             </section>
-            {isSubmitted && createPortal(<SuccessModal itemList={mappedList} finalTotal={finalTotal}/>, document.getElementById("success-portal"))}
+            {isSubmitSuccessful && createPortal(<SuccessModal itemList={mappedList}/>, document.getElementById("success-portal"))}
         </main>
     ) 
 }

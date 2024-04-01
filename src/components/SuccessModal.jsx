@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import { Context } from "../context/context.jsx"
+import { useContext } from "react"
 
-const SuccessModal = ({itemList ,finalTotal}) => {
+const SuccessModal = ({itemList}) => {
+    const {finalTotal, setProductList,setFInalTotal} = useContext(Context);
+
     return(
         <div className="fixed top-0 z-50 flex justify-center items-center p-8 w-full h-full bg-bg3/75">
             <div className="flex flex-col gap-6 p-5 h-5/6 bg-white rounded-md overflow-y-scroll">
@@ -20,7 +24,7 @@ const SuccessModal = ({itemList ,finalTotal}) => {
                         <p className="text-white font-bold">${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</p>
                     </div>
                 </div>
-                <Link to="/" className="py-2 text-center text-white font-bold bg-cta">BACK TO HOME</Link>
+                <Link to="/" className="py-2 text-center text-white font-bold bg-cta" onClick={() => {setProductList([]); setFInalTotal(0)}}>BACK TO HOME</Link>
             </div>
         </div>
     )
