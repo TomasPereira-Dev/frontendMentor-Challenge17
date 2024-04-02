@@ -88,16 +88,16 @@ const Checkout = () => {
                                 <div className='row-span-2'>
                                     <p className=''>Payment Method</p>
                                 </div>
-                                <div className='p-4 border rounded-md group'>
-                                    <label className='flex flex-row-reverse justify-end items-center gap-2'>
+                                <div className='p-4 border rounded-md group bg-inactive/30'>
+                                    <label className='flex flex-row-reverse justify-end items-center gap-2 cursor-not-allowed'>
                                         MercadoPago
-                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago" defaultChecked/>
+                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago" disabled/>
                                     </label>
                                 </div>
                                 <div className='p-4 border rounded-md peer'>
                                     <label className='flex flex-row-reverse justify-end items-center gap-2'>
                                         Cash on Delivery
-                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery"/>
+                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery" defaultChecked/>
                                     </label>
                                 </div>
                                 {errors.paymentMethod && <p className='text-xs text-red-500 font-bold'>{errors.paymentMethod.message}</p>}
