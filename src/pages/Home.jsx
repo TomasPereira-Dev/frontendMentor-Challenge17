@@ -22,15 +22,15 @@ const Home = () => {
            </section>
            <section className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2">
                 <div className="flex flex-col items-center gap-6 px-4 py-8
-                bg-cta bg-patternCircles bg-no-repeat bg-top bg-[length:75vw] rounded-lg
-                md:col-span-2 lg:flex-row lg:justify-center lg:gap-48 lg:py-16 lg:bg-[length:56vw] lg:bg-left">
-                    <picture className="w-1/2 md:w-1/4 lg:relative lg:-bottom-16" >
+                bg-cta bg-patternCircles bg-no-repeat bg-cover bg-[50%_-7.5rem] rounded-lg
+                md:col-span-2 lg:flex-row lg:justify-center lg:gap-32 lg:px-24 lg:py-12 lg:bg-[-12rem_33%]">
+                    <picture className="w-1/2 lg:relative lg:-bottom-12" >
                         <source srcSet="/home/desktop/image-speaker-zx9.png" media="(min-width: 1024px)"/>
                         <source srcSet="/home/tablet/image-speaker-zx9.png" media="(min-width: 768px)"/>
                         <img src="/home/mobile/image-speaker-zx9.png" alt="audiophile's zx9 speaker" />
                     </picture>
                     <div className="flex flex-col items-center text-center gap-6 lg:items-start lg:text-start">
-                        <h2 className="text-4xl text-white  font-bold max-w-[8ch]md:text-6xl ">ZX9 SPEAKER</h2>
+                        <h2 className="text-4xl text-white  font-bold max-w-[8ch] md:text-6xl ">ZX9 SPEAKER</h2>
                         <p className=" text-white/75 max-w-[30ch] leading-7 md:max-w-[36ch]">Upgrade to premium speakers that are phenomenally build to deliver truly remarkable sound.</p>
                         <SeeProductBtn classes={`text-white bg-black hover:bg-gray-700 `} dynamicPath={`zx9-speaker`}/>
                     </div>
