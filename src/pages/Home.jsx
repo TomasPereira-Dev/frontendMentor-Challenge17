@@ -6,7 +6,7 @@ import data from "../data.json"
 const Home = () => {
     return (
         <main className="flex flex-col gap-16 mb-16">
-           <section className="flex items-center justify-center h-screen px-8 
+           <section className="flex items-center justify-center h-screen px-4 
            bg-mobileHero bg-center bg-no-repeat bleeding-1
            md:bg-tabletHero lg:justify-start lg:bg-desktopHero lg:bg-cover">
                 <div className="flex flex-col items-center gap-4 justify-center text-center

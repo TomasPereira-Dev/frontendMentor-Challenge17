@@ -48,20 +48,20 @@ const Cart = ({setCartIsOpen}) => {
             <div className="relative z-50 top-1/4 flex flex-col justify-between gap-4 w-full h-4/6 p-8 bg-white rounded-md overflow-y-scroll md:top-14 md:w-1/2 ">
                 <div className="flex justify-between">
                     <p className="text-lg font-bold">CART ({productList.length})</p>
-                    <button className="text-sm text-inactive underline cursor-pointer" onClick={() => {setProductList([])}}>Remove All</button>
+                    <button className="text-sm text-inactive cursor-pointer hover:underline" onClick={() => {setProductList([])}}>Remove All</button>
                 </div>
-                <ul>
+                <ul className="flex flex-col gap-2">
                     {productList.map(product => (
                         <li className="flex justify-between items-center gap-2" key={product.id}>
                             <div className="flex items-center gap-2" >
-                                <img className='w-1/3 rounded-md' src={product.image} alt={product.name} />
+                                <img className='max-w-16 rounded-md' src={product.image} alt={product.name} />
                                 <div>
                                     <p className='text-sm font-bold md:text-base' >{product.name}</p>
                                     <p className='text-sm text-text1 md:text-base'>${product.price}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4 bg-bg2 rounded">
-                                <button className="px-2 py-1" onClick={(e) => {amountHandler(product, e)}}>-</button><p>{product.amount}</p><button className="px-2 py-1" onClick={(e) => {amountHandler(product, e)}}>+</button>
+                                <button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {amountHandler(product, e)}}>-</button><p className="text-sm">{product.amount}</p><button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {amountHandler(product, e)}}>+</button>
                             </div>
                         </li>
                         )
@@ -73,7 +73,7 @@ const Cart = ({setCartIsOpen}) => {
                         <p className="text-lg font-bold">${total}</p>
                     </div>
                     <Link to={productList.length > 0 && '/checkout'} className={`w-full py-3 text-sm text-white text-center font-semibold 
-                    ${productList.length == 0 ? 'bg-inactive' : 'bg-cta hover:brightness-125 hover:ease-in-out hover:delay-75'}`}
+                    ${productList.length == 0 ? 'bg-inactive cursor-default' : 'bg-cta hover:brightness-125 hover:ease-in-out hover:delay-75'}`}
                     onClick = {() => {productList.length > 0 && setCartIsOpen(false)}}>CHECKOUT</Link>
                 </div>
                 

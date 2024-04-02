@@ -24,7 +24,7 @@ const ProductPage = () => {
     };
 
     return(
-        <main className="flex flex-col gap-8 p-8 lg:gap-24">
+        <main className="flex flex-col gap-8 p-4 py-8 lg:gap-24">
             <button className="w-fit" onClick={() => navigate(-1)}>Go Back</button>
             <section className="flex flex-col">
                 <div className="flex flex-col gap-12 md:flex-row">
@@ -40,9 +40,9 @@ const ProductPage = () => {
                         <p className="text-xl font-bold">${productData[0].price}</p>
                         <div className="flex gap-4">
                             <div className="flex items-center justify-center gap-4 px-6 py-3 text-xl bg-bg2">
-                                <button onClick={() => {quantity > 0 && setQuantity(quantity - 1)}}>-</button><span className="text-bold">{quantity}</span><button onClick={() => {setQuantity(quantity + 1)}}>+</button>
+                                <button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {quantity > 0 && setQuantity(quantity - 1)}}>-</button><span className="text-sm font-bold">{quantity}</span><button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {setQuantity(quantity + 1)}}>+</button>
                             </div>
-                            <button className="text-white font-semibold bg-cta px-6 py-3" onClick={() => {quantity > 0 && setProductList([...productList, productForList])}}>ADD TO CART</button>
+                            <button className="text-white font-semibold bg-cta px-6 py-3 hover:brightness-125 hover:ease-in-out hover:delay-75" onClick={() => {quantity > 0 && setProductList([...productList, productForList])}}>ADD TO CART</button>
                         </div>
                     </div>
                 </div>   

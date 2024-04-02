@@ -8,7 +8,7 @@ const CategoryPage = ({category}) => {
     const newData = data.filter((product) => product.category === category)
     
     return (
-        <main className="flex flex-col gap-16 px-8 pb-8">
+        <main className="flex flex-col gap-16 px-4 pb-8">
             <section className="bg-bg3 py-8 mb-8 bleeding-1">
                 <h1 className="text-3xl text-white text-center font-bold">{newData[0].category.toUpperCase()}</h1>
             </section>

@@ -1,14 +1,16 @@
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { Context } from '../context/context.jsx';
 import SuccessModal from '../components/SuccessModal.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
 
     const {productList, finalTotal} = useContext(Context);
     const {handleSubmit, register, formState: { errors, isSubmitSuccessful}, watch} = useForm();
+    const navigate = useNavigate();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
 
     const mappedList = productList.map(product => (
@@ -27,8 +29,8 @@ const Checkout = () => {
     ));
 
     return (
-        <main className="p-4 lg:px-8 lg:py-16 bg-bg2 bleeding-3">
-            <button className="mb-4 text-semibold text-text1">Go Back</button>
+        <main className="p-4 lg:py-16 bg-bg2 bleeding-3">
+            <button className="mb-4 text-semibold text-text1" onClick={() => navigate(-1)}>Go Back</button>
             <section className='grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-8'>
                 <div className='p-4 bg-white rounded-md md:p-8 lg:col-span-2'>
                     <h1 className="mb-12 text-2xl font-bold lg:text-3xl">CHECKOUT</h1>
