@@ -1,7 +1,6 @@
 import Shops from "../components/Shops.jsx"
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import AboutSection from "../components/AboutSection.jsx"
-import data from "../data.json"
 
 const Home = () => {
     return (

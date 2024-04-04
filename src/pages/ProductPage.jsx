@@ -1,28 +1,44 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import data from "../data.json"
+import data from "../json/data.json"
 import SeeProductBtn from "../components/SeeProductBtn.jsx";
 import Shops from "../components/Shops.jsx";
 import AboutSection from "../components/AboutSection.jsx";
 import { Context } from "../context/context.jsx";
 
 const ProductPage = () => {
-    
+
     const {productName} = useParams();
     const navigate = useNavigate();
 
+    const [quantity, setQuantity] = useState(1);
+    const productData = useMemo(() => data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase()), [productName]);
     const {productList, setProductList} = useContext(Context);
-    const [quantity, setQuantity] = useState(0);
 
-    const productData = data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase());
-    const productForList = {
-      id: productData[0].id,
-      image: productData[0].cartInfo.image,
-      name: productData[0].cartInfo.name,
-      price: productData[0].price,
-      amount: quantity
-    };
+    const addHandler = () => {
+        const productForList = {
+            id: productData[0].id,
+            image: productData[0].cartInfo.image,
+            name: productData[0].cartInfo.name,
+            price: productData[0].price,
+            amount: quantity
+        };
 
+        setProductList([...productList, productForList]);
+        let i = 0;
+        let temp = productList.slice();
+
+        while(i < productList.length){
+            if(productForList.id === productList[i].id){
+                temp.splice(i, 1, productForList);
+                setProductList(temp);
+                break;
+                }
+                i++;
+            }
+            setQuantity(1);
+        }
+        
     return(
         <main className="flex flex-col gap-8 p-4 py-8 lg:gap-24">
             <button className="w-fit" onClick={() => navigate(-1)}>Go Back</button>
@@ -40,9 +56,9 @@ const ProductPage = () => {
                         <p className="text-xl font-bold">${productData[0].price}</p>
                         <div className="flex gap-4">
                             <div className="flex items-center justify-center gap-4 px-6 py-3 text-xl bg-bg2">
-                                <button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {quantity > 0 && setQuantity(quantity - 1)}}>-</button><span className="text-sm font-bold">{quantity}</span><button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {setQuantity(quantity + 1)}}>+</button>
+                                <button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {quantity > 1 && setQuantity(quantity - 1)}}>-</button><span className="text-sm font-bold">{quantity}</span><button className="hover:text-cta hover:ease-in-out hover:delay-75" onClick={() => {setQuantity(quantity + 1)}}>+</button>
                             </div>
-                            <button className="text-white font-semibold bg-cta px-6 py-3 hover:brightness-125 hover:ease-in-out hover:delay-75" onClick={() => {quantity > 0 && setProductList([...productList, productForList])}}>ADD TO CART</button>
+                            <button className="text-white font-semibold bg-cta px-6 py-3 hover:brightness-125 hover:ease-in-out hover:delay-75" onClick={() => {addHandler()}}>ADD TO CART</button>
                         </div>
                     </div>
                 </div>   
@@ -89,7 +105,7 @@ const ProductPage = () => {
                                 <img className="rounded-md" src={item.image.mobile} alt={`audiophile's ${item.name}`} />
                             </picture>
                             <h3 className="text-2xl font-bold">{item.name}</h3>
-                            <SeeProductBtn classes={'bg-cta text-white'} dynamicPath={`/${item.slug}`}/>
+                            <SeeProductBtn classes={'bg-cta text-white'} dynamicPath={`/${item.slug}`} setQuantity={setQuantity}/>
                         </div>
                     )}
                 </div>

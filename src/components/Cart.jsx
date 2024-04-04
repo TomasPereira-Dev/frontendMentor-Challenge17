@@ -25,6 +25,7 @@ const Cart = ({setCartIsOpen}) => {
                     break;
                 }
             }
+            i++;
         }
         setProductList(temp);
     }
