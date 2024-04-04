@@ -12,7 +12,7 @@ const ProductPage = () => {
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
-    const productData = useMemo(() => data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase()), [productName]);
+    const productData = useMemo(() => data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase(), setQuantity(1) ), [productName]);
     const {productList, setProductList} = useContext(Context);
 
     const addHandler = () => {
