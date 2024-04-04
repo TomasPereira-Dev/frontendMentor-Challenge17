@@ -17,7 +17,7 @@ const Checkout = () => {
         <li key={product.id}>
             <div className='flex justify-between items-center'>
                 <div className='flex items-center gap-4'>
-                    <img className='w-1/4 aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
+                    <img className='max-w-[4rem] aspect-square object-cover rounded-md' src={product.image} alt={product.name} />
                     <div>
                         <p className='font-bold'>{product.name}</p>
                         <p className='text-text1'>${product.price}</p>
@@ -111,7 +111,7 @@ const Checkout = () => {
                 </div>
                 <div className='flex flex-col gap-2 p-4 h-fit bg-white rounded-md md:p-8'>
                     <h2 className='text-lg font-bold'>SUMMARY</h2>
-                    <ul>
+                    <ul className='flex flex-col gap-2'>
                         {mappedList}
                     </ul>
                     <ul>
