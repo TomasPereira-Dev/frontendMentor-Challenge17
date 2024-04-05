@@ -33,11 +33,12 @@ npm run dev
 ```
 
 ## Tech I Used
-I mainly used React, JavaScript and Tailwind for the styling, all the data used for this project came from a local JSON file,   
-no APIs involved (yet).
+I mainly used React, JavaScript and Tailwind for the styling, all the data used for this project  
+came from a local JSON file, no APIs involved (yet).
 
 ## Plans for the future
-I want to add a payment prossesor for debit/credit card transactions by the end of April 2024, most probably Mercado Pago, I don't know if I need to learn about backend for this, so it might took me more time than that. 
+I want to add a payment prossesor for debit/credit card transactions by the end of April 2024  
+most probably Mercado Pago, I don't know if I need to learn about backend for this, so it might took me more time than that. 
 
 ## Acknowledgements
 
