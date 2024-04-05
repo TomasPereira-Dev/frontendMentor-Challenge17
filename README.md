@@ -1,8 +1,18 @@
-# React + Vite
+# Audiophile
+Project No.17 | guru level project.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is part of Frontend Mentor's catalogue of project ideas.  
 
-Currently, two official plugins are available:
+The goal was to (based only on a few images) do a complete E-commerce page with a fully responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run It Locally
+
+Clone this repo first in your code editor (like VS Code)
+
+```
+git clone https://github.com/TomasPereira-Dev/frontendMentor-Challenge17.git
+```
+
+
+
+
