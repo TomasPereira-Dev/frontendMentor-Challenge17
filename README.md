@@ -1,5 +1,4 @@
 # Audiophile
-Project No.17 | guru level project.
 
 This project is part of Frontend Mentor's catalogue of project ideas.  
 
