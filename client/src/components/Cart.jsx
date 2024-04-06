@@ -6,7 +6,7 @@ const Cart = ({setCartIsOpen}) => {
     const {productList, setProductList, setFinalTotal} = useContext(Context);
     const [total, setTotal] = useState(0); 
 
-    const amountHandler = (product, e) => {
+    const quantityHandler = (product, e) => {
         const clickedButton = e.target.innerText;
         let i = 0;
         let temp = productList.slice();
@@ -14,11 +14,11 @@ const Cart = ({setCartIsOpen}) => {
         while(i < temp.length) {
             if(product.id === temp[i].id){
                 if(clickedButton === "+"){
-                    temp[i].amount++;
+                    temp[i].quantity++;
                     break;
                 }else{
-                    temp[i].amount--;
-                    if(temp[i].amount === 0){
+                    temp[i].quantity--;
+                    if(temp[i].quantity === 0){
                         temp.splice(i, 1);
                         break;
                     }
@@ -33,7 +33,7 @@ const Cart = ({setCartIsOpen}) => {
     const totalHandler = useCallback(() => {
         let temp = 0;
         for(let i = 0; i < productList.length; i++){
-            temp = temp += (productList[i].price * productList[i].amount);
+            temp = temp += (productList[i].price * productList[i].quantity);
         }
         setTotal(temp);
         setFinalTotal(temp);
@@ -62,7 +62,7 @@ const Cart = ({setCartIsOpen}) => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4 bg-bg2 rounded">
-                                <button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {amountHandler(product, e)}}>-</button><p className="text-sm">{product.amount}</p><button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {amountHandler(product, e)}}>+</button>
+                                <button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {quantityHandler(product, e)}}>-</button><p className="text-sm">{product.quantity}</p><button className="px-2 py-1 hover:text-cta hover:ease-in-out hover:delay-75" onClick={(e) => {quantityHandler(product, e)}}>+</button>
                             </div>
                         </li>
                         )
