@@ -1,17 +1,46 @@
+import axios from "axios";
 import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Context } from '../context/context.jsx';
 import SuccessModal from '../components/SuccessModal.jsx';
 import { useNavigate } from 'react-router-dom';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 const Checkout = () => {
     const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
 
+    initMercadoPago('TEST-29338273-e883-402b-9c72-4bef3fe16a8e');
+
+    const [preferenceId, setPreferenceId] = useState(null);
     const {productList, finalTotal} = useContext(Context);
     const {handleSubmit, register, formState: { errors, isSubmitSuccessful}, watch} = useForm();
     const navigate = useNavigate();
     const paymentMethod = watch("paymentMethod", "mercadoPago");
+
+    const createPreference = async () => {
+        try {
+            const response = await axios.post("http://localhost:3000/create_preference", {
+                title: "Audiophile products",
+                quantity: 1,
+                price: Math.round(finalTotal + 50 + (finalTotal * 20) / 100)
+            });
+
+            const { id } = response.data;
+            return id;
+
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
+    const handleBuy =  async () => {
+        const id = await createPreference();
+        if(id){
+            setPreferenceId(id);
+        }
+    } 
 
     const mappedList = productList.map(product => (
         <li key={product.id}>
@@ -93,6 +122,7 @@ const Checkout = () => {
                                         MercadoPago
                                         <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago" defaultChecked/>
                                     </label>
+                                    {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts:{ valueProp: 'smart_option'}}} />}
                                 </div>
                                 <div className='p-4 border rounded-md peer'>
                                     <label className='flex flex-row-reverse justify-end items-center gap-2'>
@@ -120,7 +150,7 @@ const Checkout = () => {
                         <li className='flex justify-between items-center'><p className='text-text1'>VAT (INCLUDED)</p> <span className='text-lg font-bold'>${Math.round((finalTotal * 20) / 100)}</span></li>
                         <li className='flex justify-between items-center my-8'><p className='text-text1'>GRAND TOTAL</p> <span className='text-lg text-cta font-bold'>${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</span></li>
                     </ul>
-                    <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form'>CONTINUE & PAY</button>
+                    <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form' onClick={handleBuy}>CONTINUE & PAY</button>
                 </div>
             </section>
             {isSubmitSuccessful && createPortal(<SuccessModal itemList={mappedList}/>, document.getElementById("success-portal"))}

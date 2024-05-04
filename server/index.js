@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
-import pkg  from "mercadopago";
+import pkg from "mercadopago";
 
-const { mercadoPagoConfig, Preference } = pkg;
+const { MercadoPagoConfig, Preference } = pkg;
 
-const client =  mercadoPagoConfig({
-    accessToken: "",
+const client = new MercadoPagoConfig({
+    accessToken: "TEST-3877524555477418-040120-4a5a8c25ef60e03d83b4657fb0dfa842-581759247",
 });
 
 const app = express();
