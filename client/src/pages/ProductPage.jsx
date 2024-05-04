@@ -21,7 +21,7 @@ const ProductPage = () => {
             image: productData[0].cartInfo.image,
             name: productData[0].cartInfo.name,
             price: productData[0].price,
-            amount: quantity
+            quantity: quantity
         };
 
         setProductList([...productList, productForList]);

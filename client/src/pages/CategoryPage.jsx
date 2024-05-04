@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import data from "../json/data.json" 
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import Shops from "../components/Shops.jsx"
