@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useForm } from 'react-hook-form';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Context } from '../context/context.jsx';
 import SuccessModal from '../components/SuccessModal.jsx';
@@ -40,7 +40,7 @@ const Checkout = () => {
         if(id){
             setPreferenceId(id);
         }
-    } 
+    }
 
     const mappedList = productList.map(product => (
         <li key={product.id}>
@@ -52,7 +52,7 @@ const Checkout = () => {
                         <p className='text-text1'>${product.price}</p>
                     </div>
                 </div>
-                <p className='text-text1'>x{product.amount}</p>
+                <p className='text-text1'>x{product.quantity}</p>
             </div>
         </li>   
     ));
@@ -117,17 +117,16 @@ const Checkout = () => {
                                 <div className='row-span-2'>
                                     <p className=''>Payment Method</p>
                                 </div>
-                                <div className='p-4 border rounded-md group'>
-                                    <label className='flex flex-row-reverse justify-end items-center gap-2'>
-                                        MercadoPago
-                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago" defaultChecked/>
-                                    </label>
-                                    {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts:{ valueProp: 'smart_option'}}} />}
-                                </div>
                                 <div className='p-4 border rounded-md peer'>
                                     <label className='flex flex-row-reverse justify-end items-center gap-2'>
                                         Cash on Delivery
-                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery"/>
+                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery" defaultChecked/>
+                                    </label>
+                                </div>
+                                <div className='p-4 border rounded-md group'>
+                                    <label className='flex flex-row-reverse justify-end items-center gap-2'>
+                                        MercadoPago
+                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'})} type="radio" value="mercadoPago" />
                                     </label>
                                 </div>
                                 {errors.paymentMethod && <p className='text-xs text-red-500 font-bold'>{errors.paymentMethod.message}</p>}
@@ -139,7 +138,7 @@ const Checkout = () => {
                         </div>
                     </form>
                 </div>
-                <div className='flex flex-col gap-2 p-4 h-fit bg-white rounded-md md:p-8'>
+                <div className='flex flex-col gap-2 px-4 py-8 h-fit bg-white rounded-md '>
                     <h2 className='text-lg font-bold'>SUMMARY</h2>
                     <ul className='flex flex-col gap-2'>
                         {mappedList}
@@ -150,7 +149,7 @@ const Checkout = () => {
                         <li className='flex justify-between items-center'><p className='text-text1'>VAT (INCLUDED)</p> <span className='text-lg font-bold'>${Math.round((finalTotal * 20) / 100)}</span></li>
                         <li className='flex justify-between items-center my-8'><p className='text-text1'>GRAND TOTAL</p> <span className='text-lg text-cta font-bold'>${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</span></li>
                     </ul>
-                    <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form' onClick={handleBuy}>CONTINUE & PAY</button>
+                    {paymentMethod === "mercadoPago" ? <Wallet initialization={{ preferenceId: preferenceId }}  /> : <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form'>CONTINUE & PAY</button>}
                 </div>
             </section>
             {isSubmitSuccessful && createPortal(<SuccessModal itemList={mappedList}/>, document.getElementById("success-portal"))}
