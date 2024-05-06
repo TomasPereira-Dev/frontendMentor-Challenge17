@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Context } from '../context/context.jsx';
 import SuccessModal from '../components/SuccessModal.jsx';
 import { useNavigate } from 'react-router-dom';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { initMercadoPago } from '@mercadopago/sdk-react'
 
 const Checkout = () => {
     const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
@@ -23,7 +23,8 @@ const Checkout = () => {
             const response = await axios.post("http://localhost:3000/create_preference", {
                 title: "Audiophile products",
                 quantity: 1,
-                price: Math.round(finalTotal + 50 + (finalTotal * 20) / 100)
+                price: Math.round(finalTotal + 50 + (finalTotal * 20) / 100),
+                paymentMethod: paymentMethod
             });
 
             const { id } = response.data;
@@ -120,7 +121,7 @@ const Checkout = () => {
                                 <div className='p-4 border rounded-md peer'>
                                     <label className='flex flex-row-reverse justify-end items-center gap-2'>
                                         Cash on Delivery
-                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery" defaultChecked/>
+                                        <input className='p-4 border rounded-md outline-none' {...register("paymentMethod", {required: 'this is required'}) } type="radio" value="cashOnDelivery"/>
                                     </label>
                                 </div>
                                 <div className='p-4 border rounded-md group'>
@@ -149,10 +150,10 @@ const Checkout = () => {
                         <li className='flex justify-between items-center'><p className='text-text1'>VAT (INCLUDED)</p> <span className='text-lg font-bold'>${Math.round((finalTotal * 20) / 100)}</span></li>
                         <li className='flex justify-between items-center my-8'><p className='text-text1'>GRAND TOTAL</p> <span className='text-lg text-cta font-bold'>${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</span></li>
                     </ul>
-                    {paymentMethod === "mercadoPago" ? <Wallet initialization={{ preferenceId: preferenceId }}  /> : <button className='py-2 text-white font-bold bg-cta' type='submit' form='checkout-form'>CONTINUE & PAY</button>}
+                    <button className='py-2 text-white font-bold bg-cta' form='checkout-form' onClick={handleBuy}>CONTINUE & PAY</button> 
                 </div>
             </section>
-            {isSubmitSuccessful && createPortal(<SuccessModal itemList={mappedList}/>, document.getElementById("success-portal"))}
+            {isSubmitSuccessful && createPortal(<SuccessModal preferenceId={preferenceId} paymentMethod={paymentMethod} itemList={mappedList}/>, document.getElementById("success-portal"))}
         </main>
     ) 
 }

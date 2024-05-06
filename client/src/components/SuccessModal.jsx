@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { Context } from "../context/context.jsx"
 import { useContext } from "react"
+import { Wallet } from '@mercadopago/sdk-react'
 
-const SuccessModal = ({itemList}) => {
+const SuccessModal = ({preferenceId, paymentMethod, itemList}) => {
     const {finalTotal, setProductList,setFInalTotal} = useContext(Context);
-
     return(
         <div className="fixed top-0 z-50 flex justify-center items-center p-8 w-full h-full bg-bg3/75">
             <div className="flex flex-col gap-6 p-5 h-5/6 bg-white rounded-md overflow-y-scroll">
@@ -24,6 +24,10 @@ const SuccessModal = ({itemList}) => {
                         <p className="text-white font-bold">${Math.round(finalTotal + 50 + (finalTotal * 20) / 100)}</p>
                     </div>
                 </div>
+                <div className={`${paymentMethod === "mercadoPago" ? "block" : "hidden"}`}>
+                    {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
+                </div>
+                
                 <Link to="/" className="py-2 text-center text-white font-bold bg-cta" onClick={() => {setProductList([]); setFInalTotal(0)}}>BACK TO HOME</Link>
             </div>
         </div>

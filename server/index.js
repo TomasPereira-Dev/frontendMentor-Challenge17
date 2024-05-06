@@ -39,7 +39,7 @@ app.post("/create_preference", async (req, res) => {
     }catch(error){
         console.log(error)
         res.status(500).json({
-            error: "omar algo anda mal con la preferencia"
+            error: "algo anda mal con la preferencia"
         })
     } 
 })
