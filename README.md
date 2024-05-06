@@ -2,7 +2,9 @@
 
 This project is part of Frontend Mentor's catalogue of project ideas.  
 
-The goal was to (based only on a few images) do a complete E-commerce page with a fully responsive design.
+The original goal was to (based only on a few images) do a complete E-commerce page with a fully responsive design.
+
+On top of that, I added a payment prossesor for debit/credit card transactions, so it works like a real E-commerce.
 
 ## Run It Locally
 >[!NOTE]
@@ -33,11 +35,7 @@ npm run dev
 
 ## Tech I Used
 I mainly used React, JavaScript and Tailwind for the styling, all the data used for this project  
-came from a local JSON file, no APIs involved (yet).
-
-## Plans for the future
-I want to add a payment prossesor for debit/credit card transactions by the end of April 2024  
-most probably Mercado Pago, I don't know if I need to learn about backend for this, so it might took me more time than that. 
+came from a local JSON file, the backend uses Node.js and Express and the payments were handled with Mercado Pago's Checkout Pro API.
 
 ## Acknowledgements
 
