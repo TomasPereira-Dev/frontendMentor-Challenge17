@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import pkg from "mercadopago";
+import pkg, { PaymentMethod } from "mercadopago";
 
 const { MercadoPagoConfig, Preference } = pkg;
 
@@ -28,7 +28,13 @@ app.post("/create_preference", async (req, res) => {
                     unit_price: Number(req.body.price),
                     currency_id: "ARS"
                 }
-            ]   
+            ],
+            back_urls: {
+                success: "https://frontend-mentor-challenge17-client.vercel.app/",
+                failure: "https://frontend-mentor-challenge17-client.vercel.app/",
+                pending: "https://frontend-mentor-challenge17-client.vercel.app/"
+            },
+            auto_return: "approved"  
         }
         const preference = new Preference(client);
         const result = await preference.create({ body });

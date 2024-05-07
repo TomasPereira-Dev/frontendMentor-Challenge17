@@ -13,7 +13,7 @@ const SuccessModal = ({preferenceId, paymentMethod, itemList}) => {
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold">THANK YOU FOR YOUR ORDER</h1>
-                    <p className="text-sm text-text1 font-bold ">You will receive an email confirmation shortly.</p>
+                    <p className="text-sm text-text1 font-bold ">{paymentMethod === "cashOnDelivery" ? "You will receive an email confirmation shortly." : "You will receive an email confirmation shortly after your payment is approved."}</p>
                 </div>
                 <div>
                     <ul className="p-4 bg-bg2 rounded-t-md">
@@ -27,8 +27,8 @@ const SuccessModal = ({preferenceId, paymentMethod, itemList}) => {
                 <div className={`${paymentMethod === "mercadoPago" ? "block" : "hidden"}`}>
                     {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
                 </div>
+                <Link to="/" className={`${preferenceId ? 'block' : 'hidden'} py-2 text-center text-white font-bold bg-cta`}  onClick={() => {setProductList([]); setFInalTotal(0)}}>BACK TO HOME</Link>
                 
-                <Link to="/" className="py-2 text-center text-white font-bold bg-cta" onClick={() => {setProductList([]); setFInalTotal(0)}}>BACK TO HOME</Link>
             </div>
         </div>
     )
