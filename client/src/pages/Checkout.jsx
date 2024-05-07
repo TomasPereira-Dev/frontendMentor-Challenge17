@@ -20,7 +20,7 @@ const Checkout = () => {
 
     const createPreference = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/create_preference", {
+            const response = await axios.post("http://https://frontend-mentor-challenge17.vercel.app/create_preference", {
                 title: "Audiophile products",
                 quantity: 1,
                 price: Math.round(finalTotal + 50 + (finalTotal * 20) / 100),
