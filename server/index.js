@@ -5,11 +5,11 @@ import pkg from "mercadopago";
 const { MercadoPagoConfig, Preference } = pkg;
 
 const client = new MercadoPagoConfig({
-    accessToken: "TEST-3877524555477418-040120-4a5a8c25ef60e03d83b4657fb0dfa842-581759247",
+    accessToken: "APP_USR-3877524555477418-040120-96364adfa59dc939fc9bca3341e883fb-581759247",
 });
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT|| 3000;
 
 app.use(cors());
 app.use(express.json());

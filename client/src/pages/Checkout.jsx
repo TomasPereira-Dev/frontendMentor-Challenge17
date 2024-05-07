@@ -10,7 +10,7 @@ import { initMercadoPago } from '@mercadopago/sdk-react'
 const Checkout = () => {
     const emailRegex = /[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?/i;
 
-    initMercadoPago('TEST-29338273-e883-402b-9c72-4bef3fe16a8e');
+    initMercadoPago('APP_USR-46474d36-778d-40f4-a9b1-adc0b22595da');
 
     const [preferenceId, setPreferenceId] = useState(null);
     const {productList, finalTotal} = useContext(Context);
