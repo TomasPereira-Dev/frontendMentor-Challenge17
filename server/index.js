@@ -14,10 +14,12 @@ const port = process.env.PORT|| 3000;
 
 app.use(cors());
 app.use(express.json());
+app.disable("x-powered-by");
 
 app.get("/", (req, res) => {
     res.send("FUNCA!");
 });
+
 
 //crear preference boton checkout de mercadopago
 
@@ -45,16 +47,17 @@ app.post("/create_preference", async (req, res) => {
         res.json({
             id: result.id
         });
+
     }catch(error){
-        console.log(error)
+        console.log(error);
         res.status(500).json({
             error: "algo anda mal con la preferencia"
-        })
+        });
     } 
 })
 
 app.listen(port, () => {
-    console.log(`el server esta funcionando en el puerto ${port}`)
+    console.log(`el server esta funcionando en el puerto ${port}`);
 })
 
 
@@ -62,4 +65,9 @@ app.listen(port, () => {
 
 app.get("/catalog", (req, res) => {
     res.json(data);
+})
+
+//devuelve un 404 si la ruta no existe
+app.use((req, res) => {
+    res.status(404).send('<h1>404 not found</h1>');
 })
