@@ -7,7 +7,7 @@ const CategoryPage = ({category}) => {
 
     const fetcher = url => axios.get(url).then(res => res.data);
     
-    const { data, error } = useSWR("http://localhost:3000/catalog", fetcher);
+    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app//catalog", fetcher);
     const newData = data.filter((product) => product.category === category)
     
     return (
