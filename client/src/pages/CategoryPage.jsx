@@ -1,16 +1,22 @@
+import { useMemo } from "react";
 import useSWR from "swr";
+import axios from "axios";
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import Shops from "../components/Shops.jsx"
 import AboutSection from "../components/AboutSection.jsx"
 
+
 const CategoryPage = ({category}) => {
 
     const fetcher = url => axios.get(url).then(res => res.data);
+    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app/catalog", fetcher);
     
-    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app//catalog", fetcher);
-    const newData = data.filter((product) => product.category === category)
+
+    const newData = useMemo(() => data && data.filter((product) => product.category == category), [data, category]);
+
+    console.log(data, newData)
     
-    return (
+    if(data) return (
         <main className="flex flex-col gap-16 px-4 pb-8">
             <section className="bg-bg3 py-8 mb-8 bleeding-1">
                 <h1 className="text-3xl text-white text-center font-bold">{newData[0].category.toUpperCase()}</h1>
