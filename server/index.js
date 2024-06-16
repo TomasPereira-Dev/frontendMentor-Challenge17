@@ -10,7 +10,7 @@ const client = new MercadoPagoConfig({
 });
 
 const app = express();
-const port = process.env.PORT|| 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -54,20 +54,24 @@ app.post("/create_preference", async (req, res) => {
             error: "algo anda mal con la preferencia"
         });
     } 
-})
-
-app.listen(port, () => {
-    console.log(`el server esta funcionando en el puerto ${port}`);
-})
+});
 
 
 //API del ecommerce
 
 app.get("/catalog", (req, res) => {
     res.json(data);
-})
+    console.log("requested json")
+});
 
-//devuelve un 404 si la ruta no existe
+
+
+//cosas generales
+
 app.use((req, res) => {
     res.status(404).send('<h1>404 not found</h1>');
-})
+});
+
+app.listen(port, () => {
+    console.log(`el server esta funcionando en el puerto ${port}`);
+});

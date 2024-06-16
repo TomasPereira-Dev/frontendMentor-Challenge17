@@ -1,4 +1,3 @@
-import data from "../json/data.json" 
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import Shops from "../components/Shops.jsx"
 import AboutSection from "../components/AboutSection.jsx"

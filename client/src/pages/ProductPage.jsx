@@ -1,6 +1,7 @@
 import { useContext, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
-import data from "../json/data.json"
+import { useNavigate, useParams } from "react-router-dom";
+import useSWR from "swr";
+import axios from "axios"; 
 import SeeProductBtn from "../components/SeeProductBtn.jsx";
 import Shops from "../components/Shops.jsx";
 import AboutSection from "../components/AboutSection.jsx";
@@ -8,13 +9,18 @@ import { Context } from "../context/context.jsx";
 
 const ProductPage = () => {
 
+    const fetcher = url => axios.get(url).then(res => res.data);
+
+    const { data, error } = useSWR("http://localhost:3000/catalog", fetcher);
+    
+
     const {productName} = useParams();
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
-    const productData = useMemo(() => data.filter((product) => productName.toLocaleLowerCase() === product.slug.toLocaleLowerCase(), setQuantity(1) ), [productName]);
+    const productData = useMemo(() => data && data.filter((product) => product.slug.toLowerCase() == productName.toLowerCase()), [productName]);
     const {productList, setProductList} = useContext(Context);
-
+    
     const addHandler = () => {
         const productForList = {
             id: productData[0].id,
@@ -39,7 +45,7 @@ const ProductPage = () => {
             setQuantity(1);
         }
         
-    return(
+    if(productData) return(
         <main className="flex flex-col gap-8 p-4 py-8 lg:gap-24">
             <button className="w-fit" onClick={() => navigate(-1)}>Go Back</button>
             <section className="flex flex-col">
@@ -115,7 +121,6 @@ const ProductPage = () => {
             </section>
             <AboutSection />
         </main>
-    )
+        ) 
 }
-
-export default ProductPage
+export default ProductPage;
