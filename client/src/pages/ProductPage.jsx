@@ -10,7 +10,6 @@ import { Context } from "../context/context.jsx";
 const ProductPage = () => {
 
     const fetcher = url => axios.get(url).then(res => res.data);
-
     const { data, error } = useSWR("http://localhost:3000/catalog", fetcher);
     
 

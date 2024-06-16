@@ -1,8 +1,13 @@
+import useSWR from "swr";
 import SeeProductBtn from "../components/SeeProductBtn.jsx"
 import Shops from "../components/Shops.jsx"
 import AboutSection from "../components/AboutSection.jsx"
 
 const CategoryPage = ({category}) => {
+
+    const fetcher = url => axios.get(url).then(res => res.data);
+    
+    const { data, error } = useSWR("http://localhost:3000/catalog", fetcher);
     const newData = data.filter((product) => product.category === category)
     
     return (
