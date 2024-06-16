@@ -61,6 +61,7 @@ app.post("/create_preference", async (req, res) => {
 
 app.get("/catalog", (req, res) => {
     res.json(data);
+    res.header("Access-Control-Allow-Origin", "*")
     console.log("requested json")
 });
 
