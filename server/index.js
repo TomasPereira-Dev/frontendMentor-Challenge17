@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import pkg, { PaymentMethod } from "mercadopago";
+import data from "./data.json" with { type: "json" };
 
 const { MercadoPagoConfig, Preference } = pkg;
 
@@ -9,14 +10,18 @@ const client = new MercadoPagoConfig({
 });
 
 const app = express();
-const port = process.env.PORT|| 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.disable("x-powered-by");
 
 app.get("/", (req, res) => {
     res.send("FUNCA!");
 });
+
+
+//crear preference boton checkout de mercadopago
 
 app.post("/create_preference", async (req, res) => {
     try{
@@ -42,14 +47,31 @@ app.post("/create_preference", async (req, res) => {
         res.json({
             id: result.id
         });
+
     }catch(error){
-        console.log(error)
+        console.log(error);
         res.status(500).json({
             error: "algo anda mal con la preferencia"
-        })
+        });
     } 
-})
+});
+
+
+//API del ecommerce
+
+app.get("/catalog", (req, res) => {
+    res.json(data);
+    console.log("requested json")
+});
+
+
+
+//cosas generales
+
+app.use((req, res) => {
+    res.status(404).send('<h1>404 not found</h1>');
+});
 
 app.listen(port, () => {
-    console.log(`el server esta funcionando en el puerto ${port}`)
-})
+    console.log(`el server esta funcionando en el puerto ${port}`);
+});
