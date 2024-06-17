@@ -1,12 +1,10 @@
 import express from "express";
-import cors from "cors";
-import catalogRouter from "./routes/catalogRouter.js";
-import createPreferenceRouter from "./routes/createPreferenceRouter.js";
+import { catalogRouter } from "./routes/catalogRouter.js";
+import { createPreferenceRouter } from "./routes/createPreferenceRouter.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
 app.use(express.json());
 
 app.use("/catalog", catalogRouter);
