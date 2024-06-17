@@ -1,5 +1,5 @@
 import { Router } from "express";
-import pkg, { PaymentMethod } from "mercadopago";
+import pkg from "mercadopago";
 
 const { MercadoPagoConfig, Preference } = pkg;
 const client = new MercadoPagoConfig({
