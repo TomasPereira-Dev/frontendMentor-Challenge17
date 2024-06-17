@@ -1,4 +1,5 @@
 import { Router } from "express";
+import cors from "cors"
 import pkg from "mercadopago";
 
 const { MercadoPagoConfig, Preference } = pkg;
@@ -8,7 +9,7 @@ const client = new MercadoPagoConfig({
 
 const createPreferenceRouter = Router(); 
 
-createPreferenceRouter.post("/", async (req, res) => {
+createPreferenceRouter.post("/", cors(),async (req, res) => {
     try{
         const body = {
             items: [
@@ -32,6 +33,8 @@ createPreferenceRouter.post("/", async (req, res) => {
         res.json({
             id: result.id
         });
+
+        res.header()
 
     }catch(error){
         res.status(500).json({

@@ -3,11 +3,9 @@ import cors from "cors";
 import data from "./data.json" with { type: "json" };
 
 const catalogRouter = Router();
-catalogRouter.use(cors());
 
-catalogRouter.get("/", (req, res) => {
+catalogRouter.get("/", cors(),(req, res) => {
     res.json(data);
-    res.header("Access-Control-Allow-Origin", "*");
 });
 
 export { catalogRouter }
