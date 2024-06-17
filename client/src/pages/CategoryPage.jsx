@@ -11,10 +11,7 @@ const CategoryPage = ({category}) => {
     const fetcher = url => axios.get(url).then(res => res.data);
     const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app/catalog", fetcher);
     
-
     const newData = useMemo(() => data && data.filter((product) => product.category == category), [data, category]);
-
-    console.log(data, newData)
     
     if(data) return (
         <main className="flex flex-col gap-16 px-4 pb-8">
