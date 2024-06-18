@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors"
+import dotenv from "dotenv";
+import "dotenv/config";
 import { catalogRouter } from "./routes/catalogRouter.js";
 import { createPreferenceRouter } from "./routes/createPreferenceRouter.js";
+import { connection } from "./database/MongoDB/connection.js";
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
