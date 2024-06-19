@@ -1,15 +1,18 @@
 import { Router } from "express";
-import { MongoClient } from "mongodb";
-
-
-const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db();
+import { db } from "../index.js";
 
 const catalogRouter = Router();
 
-catalogRouter.get("/catalog", async (req, res) => {
-    let results = await db.collection("catalog").find({}).toArray();
-    res.send(results);
+catalogRouter.get("/", async (req, res) => {
+    try{
+        const coll =  db.collection("catalog");
+        const response = await coll.find({}).toArray((err, docs) => {
+            console.log(docs, err)
+        });
+        res.send(response)
+    } catch (error){
+        console.log(error)
+    }
 });
 
 export { catalogRouter }
