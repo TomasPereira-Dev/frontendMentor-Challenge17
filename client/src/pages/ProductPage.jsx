@@ -10,7 +10,8 @@ import { Context } from "../context/context.jsx";
 const ProductPage = () => {
 
     const fetcher = url => axios.get(url).then(res => res.data);
-    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app/", fetcher);
+    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app/catalog", fetcher);
+    console.log(error)
 
     const {productName} = useParams();
     const navigate = useNavigate();
