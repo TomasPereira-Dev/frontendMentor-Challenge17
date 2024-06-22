@@ -1,1 +1,1 @@
-GET https://frontend-mentor-challenge17.vercel.app/localhost:3000/catalog
+GET http://localhost:3000/catalog

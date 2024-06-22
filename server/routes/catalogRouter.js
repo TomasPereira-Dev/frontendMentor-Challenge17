@@ -1,10 +1,11 @@
-import { Router } from "express";
-import data from "../data.json" with { type: "json" };
+import { Router, response } from "express";
+import { db } from "../index.js";
 
 const catalogRouter = Router();
 
-catalogRouter.get("/", (req, res) => {
-    res.json(data)
+catalogRouter.get("/", async (req, res) => {
+    const collection =  (await db).collection("catalog").find({}).toArray();
+    res.send(await collection);
 });
 
 export { catalogRouter }
