@@ -46,6 +46,8 @@ Install the dependencies and then turn on the server with
 npm install express cors mercadopago
 node index.js
 ```
+## For the future  
+I want to replace the JSON file with a noSQL database like mongoDB in the near future, I spect it to took me 2 weeks from today (22/6/2024)
 
 ## Tech I Used
 I mainly used React, JavaScript and Tailwind for the styling, all the data used for this project  
