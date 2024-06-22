@@ -3,7 +3,7 @@ import pkg from "mercadopago";
 
 const { MercadoPagoConfig, Preference } = pkg;
 const client = new MercadoPagoConfig({
-    accessToken: "APP_USR-3877524555477418-040120-96364adfa59dc939fc9bca3341e883fb-581759247",
+    accessToken: process.env.MP_TOKEN,
 });
 
 const createPreferenceRouter = Router(); 
