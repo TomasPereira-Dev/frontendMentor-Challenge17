@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient("mongodb+srv://tomaspereira2k:palermo1113@audiophile.onxgh7o.mongodb.net/?retryWrites=true&w=majority&appName=audiophile");
-
+const client = new MongoClient(process.env.MONGODB_URI);
 
 export const connectToDatabase = async () => {
     try{

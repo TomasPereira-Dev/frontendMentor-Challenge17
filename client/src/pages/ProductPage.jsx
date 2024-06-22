@@ -10,14 +10,14 @@ import { Context } from "../context/context.jsx";
 const ProductPage = () => {
 
     const fetcher = url => axios.get(url).then(res => res.data);
-    const { data, error } = useSWR("https://frontend-mentor-challenge17.vercel.app/catalog", fetcher);
-    console.log(error)
+    const { data, error } = useSWR("http://localhost:3000/catalog", fetcher);
+    console.log(data)
 
     const {productName} = useParams();
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
-    const productData = useMemo(() => data && data.filter((product) => product.slug.toLowerCase() == productName.toLowerCase()), [productName, data]);
+    const productData = useMemo(() => data ? Array.from(data).filter((product) => product.slug.toLowerCase() == productName.toLowerCase()) : [] ,[productName, data]);
     const {productList, setProductList} = useContext(Context);
     
     const addHandler = () => {
@@ -45,7 +45,7 @@ const ProductPage = () => {
         }
     
 
-    if(data) return(
+    if(productData.length > 0) return(
         <main className="flex flex-col gap-8 p-4 py-8 lg:gap-24">
             <button className="w-fit" onClick={() => navigate(-1)}>Go Back</button>
             <section className="flex flex-col">
