@@ -1,5 +1,5 @@
 import { Router } from "express";
-import data from "../data.json";
+import data from "../data.json" with { type: "json" };
 
 const catalogRouter = Router();
 
