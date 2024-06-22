@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-export const { db } = connectToDatabase();
+export const db = connectToDatabase();
 
 app.use("/catalog", catalogRouter);
 app.use("/create_preference", createPreferenceRouter);
@@ -30,3 +30,5 @@ app.use((req, res) => {
 app.listen(port, () => {
     console.log(`el server esta funcionando en el puerto ${port}`);
 });
+
+export default app;
